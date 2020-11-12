@@ -48,22 +48,17 @@ def scrape():
     # Mars Facts Table
     import pandas as pd 
 
-    mars_table = {}
     url = 'https://space-facts.com/mars/'
     tables = pd.read_html(url)
     mars_df = tables[0]
     #mars_df.set_index(0)
     mars_df.rename(columns = { 0 : 'Description', 1 : 'Mars'}, inplace = True)
-    #mars_df.index.name = 'Description'
-    #mars_table = mars_df.to_html('fact_table.html')
+    mars_df.index.name = 'Description'
+    mars_df.to_string(index=False)
+    mars_table = mars_df.to_html()
+    mars_table.replace('\n', '')
 
-    description = mars_df['Description'].to_list()
-    mars = mars_df['Mars'].to_list()
-
-    for info in range(len(description)):
-        mars_table.update( {description[info] : mars[info]} )
-    
-
+   
     #-----------------------------------------------------------------------------------
     # Mars Hemisphere
     url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'

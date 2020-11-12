@@ -12,6 +12,7 @@
 <style>
   img {
     border-radius: 8px;
+    filter: grayscale(50%)
   }
   </style>
 
@@ -33,12 +34,9 @@
           <div class="col-md-5">
             <h2>Mars Facts</h2>
             
-            <table>
-              { % for info in article.table % }
-              <tr>{{ info }}</tr>
-              { % endfor % }
+            <table class='table table-borderless'>
+              {{ article.table | safe }} 
             </table>
-
 
 
 
@@ -52,7 +50,7 @@
           {% for image in article.hem_image %}
           <div class="col-md-5">
             <img src="{{ article.hem_image[image] }}" alt="Article" width= "400px" height= "400px">
-            <p>{{ image }}</p>
+            <p><b>{{ image }}</b></p>
           </div>
           {% endfor %}
         </div>
